@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.matzip.user.UserMapper">
+<!-- mapper의 namespace에는 풀네임 적고 
+mapper PUBLIC으로 바꾸고 두번째 ""칸에 config 대신 mapper 추가  -->
+	<insert id="insUser" parameterType="UserVO">
+		INSERT INTO t_user
+		(user_id, user_pw, salt, nm)
+		VALUES
+		(#{user_id}, #{user_pw}, #{salt}, #{nm})
+	</insert> <!-- 원래 EL식 썼던거랑 같음 // $은 그 값 그대로 #은 값에 맞춰서 넣어줌-->
+	
+	<insert id="insFavorite" parameterType="UserPARAM">
+		INSERT INTO t_user_favorite
+		(i_rest, i_user) 
+		VALUES
+		(#{i_rest}, #{i_user})
+	</insert>
+	
+	<select id="selUser" parameterType="UserPARAM" resultType="UserDMI">
+		SELECT i_user, user_id, user_pw, salt, nm, profile_img, r_dt
+		FROM t_user
+		WHERE 
+		<if test="i_user > 0"> i_user = #{i_user}</if>
+		<if test="user_id != null and user_id != ''"> user_id = #{user_id}</if>
+	</select>
+	
+	<select id="selFavoriteList" parameterType="UserPARAM" 
+		resultType="UserDMI">
+		SELECT A.i_rest, A.i_user, A.r_dt
+			, B.nm AS rest_nm
+			, B.addr AS rest_addr
+		FROM t_user_favorite A
+		INNER JOIN t_restaurant B
+		ON A.i_rest = B.i_rest
+		WHERE A.i_user = #{i_user}
+	</select>
+	
+	<delete id="delFavorite" parameterType="UserPARAM">
+		DELETE FROM t_user_favorite
+		WHERE i_rest = #{i_rest}
+		AND i_user = #{i_user}
+	</delete>
+</mapper>

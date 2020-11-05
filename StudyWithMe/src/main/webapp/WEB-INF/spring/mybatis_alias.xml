@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 주솟값이 너무 기니까 대신 줄여주는  -->
+		<typeAlias type="com.spring.swm.stopwatch.model.TimeVO" alias="TimeVO"/>
+		<typeAlias type="com.spring.swm.user.model.UserVO" alias="UserVO"/>
+	</typeAliases>
+</configuration>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.swm.user.UserMapper">
+	<select id="selUser" parameterType="UserVO" resultType="UserVO">
+		SELECT i_user, user_email, user_pw, salt, nm, r_dt
+		FROM s_user
+		WHERE
+		<if test="i_user > 0"> i_user = #{i_user}</if>
+		<if test="user_email != null and user_email != ''"> user_email = #{user_email}</if>
+	</select>
+	
+	<select id="selEmail" parameterType="UserVO" resultType="UserVO">
+		SELECT user_email FROM s_user 
+		WHERE user_email = #{user_email}
+	</select>
+	
+	<insert id="insUser" parameterType="UserVO">
+		INSERT INTO s_user
+		(user_email, user_pw, salt, nm, r_dt)
+		VALUES
+		(#{user_email}, #{user_pw}, #{salt}, #{nm}, now())
+	</insert>
+
+</mapper>

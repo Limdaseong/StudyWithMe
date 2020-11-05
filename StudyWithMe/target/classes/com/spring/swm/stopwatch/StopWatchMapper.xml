@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0/EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.swm.stopwatch.StopWatchMapper">
+	
+	<select id="selStartTime" parameterType="TimeVO" resultType="TimeVO">
+		SELECT start_time FROM s_usertime where i_user = 1
+	</select>
+
+	<insert id="insStartTime" parameterType="TimeVO">
+		INSERT INTO s_usertime 
+		(start_time, i_user)
+		VALUES (now(), 1)
+	</insert>
+	<insert id="insEndTime" parameterType="TimeVO">
+		INSERT INTO s_usertime
+		(start_time, end_time, i_user)
+		VALUES (date_format(#{start_time},'%Y-%m-%d %H:%i:%s'), now(), 1)
+	</insert>
+	
+	<delete id="delStartTime" parameterType="TimeVO">
+		DELETE FROM s_usertime
+		WHERE start_time = #{start_time} AND i_user = 1 
+	</delete>
+	
+</mapper>

@@ -21,5 +21,12 @@
 		VALUES
 		(#{user_email}, #{user_pw}, #{salt}, #{nm}, now())
 	</insert>
+	
+	<insert id="insKakaoUser" parameterType="UserVO">
+		INSERT INTO s_user
+		(user_email, profile_img, nm, r_dt)
+		VALUES
+		(#{user_email}, #{profile_img} #{nm}, now())
+	</insert>
 
 </mapper>

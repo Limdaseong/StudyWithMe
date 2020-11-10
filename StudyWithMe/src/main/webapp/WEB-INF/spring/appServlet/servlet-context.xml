@@ -37,7 +37,7 @@
 	    
 	    <beans:property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/mysql?characterEncoding=UTF-8&amp;serverTimezone=UTC"/>
 		<beans:property name="username" value="root"/>
-		<beans:property name="password" value="1234"/> 
+		<beans:property name="password" value="pw123"/> 
 	</beans:bean>
 	
 	<beans:bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">

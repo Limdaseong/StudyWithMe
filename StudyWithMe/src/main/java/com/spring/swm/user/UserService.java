@@ -27,6 +27,10 @@ public class UserService {
 		
 		return mapper.insUser(param);
 	}
+	
+	public int kakaoJoin(UserVO vo) {
+		return mapper.insKakaoUser(vo);
+	}
 
 	public int login(UserVO param) {
 		//1번 로그인 성공, 2번 아이디 없음, 3번 비번 틀림

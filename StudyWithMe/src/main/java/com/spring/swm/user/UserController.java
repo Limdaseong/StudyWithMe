@@ -48,11 +48,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	public String login(UserVO param, RedirectAttributes rs, HttpSession hs) {
+	public String login(UserVO param, RedirectAttributes rs, HttpSession session) {
 		int result = service.login(param);
 		
 		if(result == Const.SUCCESS) {
-			hs.setAttribute(Const.LOGIN_USER, param);
+			session.setAttribute(Const.LOGIN_USER, param);
 			return "redirect:/swm/main"; // response.sendRedirect() 서블릿 
 			// --> 서블릿(rest/map GET메소드로 감)
 		}
@@ -67,8 +67,23 @@ public class UserController {
 		param.setMsg(msg);
 		rs.addFlashAttribute("data", param);
 		
-		return "redirect:/user/joinAndLogin";
+		return "redirect:/swm/main";
 	}
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/swm/main";
+	}
+	
+	@RequestMapping(value="/kakaoLogout", method = RequestMethod.GET)
+	public String kakaoLogout(HttpSession session) {
+	    kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("userId");
+	    return "redirect:/swm/main";
+	}
+
 	
 	@RequestMapping(value="/oauth")
 	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, UserVO vo) throws Exception {
@@ -83,7 +98,7 @@ public class UserController {
 		if(rsVo == null) {
 			vo.setNm((String)userInfo.get("nickname"));
 			vo.setProfile_img((String)userInfo.get("profile_img"));
-			
+			service.kakaoJoin(vo);
 		}
 		
 		if(userInfo.get("email") != null) {

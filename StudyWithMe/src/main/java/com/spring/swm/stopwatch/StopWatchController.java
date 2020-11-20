@@ -35,6 +35,28 @@ public class StopWatchController {
 		return ViewRef.TEMP_DEFAULT;
 	}
 	
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String home(Model model) {
+		model.addAttribute(Const.TITLE, "Home");
+		model.addAttribute(Const.VIEW, "swm/home");
+		return ViewRef.TEMP_DEFAULT;
+	}
+	
+	@RequestMapping(value="/search", method=RequestMethod.GET)
+	public String search(Model model) {
+		model.addAttribute(Const.TITLE, "Search");
+		model.addAttribute(Const.VIEW, "swm/search");
+		return ViewRef.TEMP_DEFAULT;
+	}
+	
+	@RequestMapping(value="/profile", method=RequestMethod.POST)
+	public String profile(Model model) {
+		model.addAttribute(Const.TITLE, "Profile");
+		model.addAttribute(Const.VIEW, "swm/myProfile");
+		return ViewRef.TEMP_DEFAULT;
+	}
+	
+	
 	@RequestMapping(value="/start", method=RequestMethod.POST)
 	public String start(TimeVO vo) {
 		int result = service.insStartTime(vo);

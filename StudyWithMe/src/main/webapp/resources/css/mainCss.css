@@ -80,12 +80,7 @@ main {
 }
 
 section{
-	width: 37.5%;
+	width: 50%;
 	height: 100vh;
 }
 
-aside {
-	width: 25%;
-	height: 100vh;
-	border: 1px solid black;
-}

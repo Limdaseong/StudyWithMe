@@ -33,7 +33,7 @@ public class UserService {
 	}
 
 	public int login(UserVO param) {
-		//1번 로그인 성공, 2번 아이디 없음, 3번 비번 틀림
+		//1번 로그인 성공, 2번 이메 없음, 3번 비번 틀림
 		System.out.println(param.getUser_email());
 		if(param.getUser_email().equals("")) {
 			return Const.NO_EMAIL;
@@ -55,7 +55,11 @@ public class UserService {
 		return Const.SUCCESS;
 	}
 
-	public UserVO confirm(UserVO vo) {
-		return mapper.selEmail(vo);
+	public int emailChk(UserVO vo) {
+		int result = mapper.emailChk(vo);
+		return result;
 	}
+	
+	
+
 }

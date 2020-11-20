@@ -5,5 +5,8 @@
 		<!-- 주솟값이 너무 기니까 대신 줄여주는  -->
 		<typeAlias type="com.spring.swm.stopwatch.model.TimeVO" alias="TimeVO"/>
 		<typeAlias type="com.spring.swm.user.model.UserVO" alias="UserVO"/>
+		<typeAlias type="com.spring.swm.posts.model.PostPARAM" alias="PostPARAM"/>
+		<typeAlias type="com.spring.swm.posts.model.PostDMI" alias="PostDMI"/>
+		<typeAlias type="com.spring.swm.posts.model.PostVO" alias="PostVO"/>
 	</typeAliases>
 </configuration>
